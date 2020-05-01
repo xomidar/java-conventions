@@ -1,0 +1,22 @@
+apply plugin: 'java' // <1>
+
+dependencies {
+
+    implementation 'org.apache.commons:commons-lang3:3.10' // <2>
+
+    implementation(
+            'org.springframework:spring-core:5.2.6.RELEASE',
+            'org.springframework:spring-aop:5.2.6.RELEASE'
+    )
+
+    testImplementation('org.mockito:mockito-all:1.10.19')
+
+    implementation group: 'com.google.inject', name: 'guice', version: '4.2.3' // <3>
+
+    implementation files('hibernate.jar', 'libs/spring.jar') // <4>
+
+    implementation fileTree('libs') // <5>
+
+    implementation project(':shared') // <6>
+
+}

@@ -1,0 +1,10 @@
+[NOTE]
+====
+*Convention over Configuration* means, the environment in which you are working (e.g. language, framework) assumes many logical situations by default.
+So if you adapt those conventions (e.g. default source directory structure), it behaves as expected without having to configure anything (e.g. configure source directory location).
+By adopting conventions rather than explicitly creating configuration every time, programming become more productive task and reduces the repetitive configuration.
+
+If your business requirement needs to ignore default conventions, or the default behavior doesn't match with your expectation, you can still change by explicitly defining you configuration.
+
+This concept is related to ideas like the concept of *Sensible Defaults*.
+====

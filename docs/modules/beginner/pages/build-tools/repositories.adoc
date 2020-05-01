@@ -1,0 +1,160 @@
+== Repositories
+
+Repositories are the home of dependencies and plugins.
+Your project build dependencies and plugins resolved from repositories and its cache.
+Usually repositories hosted on the remote servers.
+Public repositories such as maven central accessible to anyone.
+You need the additional configuration to access corporate or private repositories.
+
+[TIP]
+====
+Based on your business requirement you may need to configure you private or corporate repository instead of relying on the public repository.
+https://www.sonatype.com/product-nexus-repository[Nexus Repository, window="_blank"] and https://www.jfrog.com/confluence/display/JFROG/JFrog+Artifactory[JFrog Artifactory, window="_blank"] are the most used repository tools to configure your private or corporate repository.
+Both tools have free offering to get start.
+Most famous repository Maven Central also hosted using Nexus Repository.
+====
+
+=== Dependency Repository
+
+Dependency repositories helps to resolve your build script dependencies.
+
+[{tabs}]
+====
+Gradle::
++
+--
+Gradle's repositories can be defined using https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.dsl.RepositoryHandler.html#N11A09[shorthand notation, window="_blank"].
+Gradle will resolve the corresponding repository url.
+
+.build.gradle
+[source,groovy]
+----
+include::beginner:example$build-tools/repositories/repository-short-notation.gradle[]
+----
+
+<1> Maven local repository.
+Gradle https://docs.gradle.org/current/userguide/declaring_repositories.html#sec:case-for-maven-local[recommends, window="_blank"] avoiding `mavenLocal()` repository.
+<2> Maven central repository.
+<3> JCenter repository.
+<4> Google repository for android.
+
+Gradle's corporate repository declaration.
+
+.build.gradle
+[source,groovy]
+----
+include::beginner:example$build-tools/repositories/corporate-repository.gradle[]
+----
+
+<1> Maven corporate repository url.
+<2> Credential for authentication, if any.
+<3> An optional configuration for snapshots only.
+<4> An optional configuration for release only. 3 and 4 should use separately.
+
+Gradle's directory repository for local files.
+
+.build.gradle
+[source,groovy]
+----
+include::beginner:example$build-tools/repositories/directory-repository.gradle[]
+----
+<1> Local directory location.
+
+https://docs.gradle.org/current/userguide/declaring_repositories.html[To learn more you can visit the official documentation, window="_blank"].
+
+--
+
+Maven::
++
+--
+Maven already applied default maven repository in your build script.
+You don't need to configure any `<repository>` element to use the default maven central repository.
+You can explicitly define any maven corporate repository in your build script.
+
+.pom.xml
+[source,xml]
+----
+include::beginner:example$build-tools/repositories/corporate-repository.xml[]
+----
+<1> Maven corporate repository in `<repository>` element.
+<2> An optional configuration for snapshots only.
+<3> An optional configuration for release only.
+
+Local file directory as repository can be configured like below.
+
+.pom.xml
+[source,xml]
+----
+include::beginner:example$build-tools/repositories/directory-repository.xml[]
+----
+<1> Maven local file directory repository.
+
+Additionally, your jars needs to deploy on that directory.
+The local artifacts can be deployed by the following command.
+
+[source]
+----
+mvn deploy:deploy-file -Dfile=<path-to-file> -DgroupId=<group-id> -DartifactId=<artifact-id> -Dversion=<version> -Dpackaging=jar -Durl=file:./maven-repository/ -DrepositoryId=maven-repository -DupdateReleaseInfo=true
+----
+
+http://maven.apache.org/pom.html#repositories[Learn more from the official documentation, window="_blank"]
+--
+====
+
+[#plugin-repository]
+=== Plugin Repository
+
+Plugin repository helps to resolve your build script plugins.
+By default, Gradle and Maven both tools applied their official plugin repository in your build script.
+To use corporate or private plugin repository additional configuration required.
+
+[{tabs}]
+====
+Gradle::
++
+--
+Gradle's official plugin portal repository already applied in your build script by default.
+You don't need any additional configuration to resolve plugins.
+To use official gradle plugin portal repository with other corporate repositories you can use `gradlePluginPortal()` short notation.
+
+.settings.gradle
+[source,groovy]
+----
+include::beginner:example$build-tools/repositories/plugin-repository-short-notation.gradle[]
+----
+<1> Gradle plugin portal repository declaration.
+
+Corporate plugin repository can be configured by `pluginManagement` block.
+
+.settings.gradle
+[source,groovy]
+----
+include::beginner:example$build-tools/repositories/plugin-corporate-repository.gradle[]
+----
+
+<1> Plugin corporate repository configuration.
+<2> Maven corporate repository url.
+<3> Credential for authentication, if any.
+<4> An optional configuration for snapshots only.
+<5> An optional configuration for release only. 4 and 5 should use separately.
+
+https://docs.gradle.org/current/userguide/plugins.html[You can learn more from the official documentation, window="_blank"].
+--
+
+Maven::
++
+--
+By default, maven included its default plugin repository in your build script.
+No additional configuration required to use default plugin repository.
+Corporate plugin repository can be configured by `<pluginRepository>` element.
+
+.pom.xml
+[source,xml]
+----
+include::beginner:example$build-tools/repositories/plugin-corporate-repository.xml[]
+----
+<1> Plugin corporate repository.
+<2> Snapshot settings enabled.
+<3> Release settings enabled.
+--
+====

@@ -1,0 +1,12 @@
+dependencies {
+    implementation('org.hibernate:hibernate:3.1') {
+
+        force = true // <1>
+
+        exclude module: 'cglib' // <2>
+        exclude group: 'org.jmock' // <3>
+        exclude group: 'org.unwanted', module: 'iAmBuggy' // <4>
+
+        transitive = false // <5>
+    }
+}

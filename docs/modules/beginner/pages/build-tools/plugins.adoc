@@ -1,0 +1,138 @@
+== Plugins
+
+Plugin is the most important topic that is often overlooked.
+Plugin makes both of the build tools highly extensible.
+Most of the build features we use throughout our build process are comes from plugins.
+Build script plugins resolved from <<index.adoc#plugin-repository,plugin repository>>.
+Plugin is one of the best topic to understand the core difference between two tools.
+
+Gradle::
+https://docs.gradle.org/current/userguide/java_plugin.html[`java`, window="_bank"], https://docs.gradle.org/current/userguide/java_library_plugin.html[`java-library`, window="_blank"], https://docs.gradle.org/current/userguide/java_platform_plugin.html[`java-platform`, window="_blank"] and https://docs.gradle.org/current/userguide/application_plugin.html[`application`, window="_blank"] are among other core plugins intended to make your java build process easier.
+Gradle does not apply these plugins in your build script by default.
+By applying any of them, many configurations (e.g. <<index.adoc#directory-structure,default directory convention>>, <<index.adoc#gradle-dependencies-configuration, dependencies configuration>> ) will be applied implicitly in your project build script.
+
+Maven::
+Maven defines three http://maven.apache.org/ref/current/maven-core/lifecycles.html[lifecycles, window="_blank"] which are *default lifecycle*, *clean lifecycle*, *site lifecycle*.
+Plugin bindings for *default lifecycle* are http://maven.apache.org/ref/current/maven-core/default-bindings.html[defined separately, window="_blank"] for every packaging (e.g. `jar`, `pom`).
+So, based on your packaging type maven applies different plugins in your build script.
+For `jar` packaging maven applies https://maven.apache.org/plugins/maven-compiler-plugin/[`maven-compiler-plugin`, window="_blank"], https://maven.apache.org/plugins/maven-install-plugin/[`maven-install-plugin`, window="_blank"], https://maven.apache.org/plugins/maven-deploy-plugin/[`maven-deploy-plugin`, window="_blank"], https://maven.apache.org/plugins/maven-jar-plugin/[`maven-jar-plugin`, window="_blank"], https://maven.apache.org/plugins/maven-resources-plugin/[`maven-resources-plugin`, window="_blank"], https://maven.apache.org/surefire/maven-surefire-plugin/[`maven-surefire-plugin`, window="_blank"] plugins in your build script by default.
+You don't need to declare these plugins explicitly unless you want to override the default configuration.
+
+=== Plugin Declaration
+
+[{tabs}]
+====
+Gradle::
++
+--
+
+.build.gradle
+[source,groovy]
+----
+include::beginner:example$build-tools/plugins/declaration.gradle[]
+----
+
+<1> Java plugin declaration.
+Gradle will apply this plugin in the build by default.
+<2> Java library plugin declaration, default apply turned off.
+Gradle will not apply this plugin in the build.
+Need to apply explicitly to use this plugin.
+<3> Unofficial Gradle plugin.
+Version property must be mentioned.
+<4> Java library plugin applied explicitly.
+
+--
+
+Maven::
++
+--
+.pom.xml
+[source,xml]
+----
+include::beginner:example$build-tools/plugins/declaration.xml[]
+----
+<1> Compiler plugin explicit declaration by `<plugin>` element.
+
+--
+====
+
+=== Plugin Explicitly Configuration
+
+Plugin can be configured explicitly.
+For example, here we will configure a Java Compiler argument which is often miss understood by developers.
+
+We can configure Java compiler to use the `-source` and `-target` compiler arguments, however it does not guarantee a cross-compilation.
+We need to configure additional compiler argument `-bootclasspath`.
+Most of the cases developers ignored the later options.
+Starting from Java 9 we can configure our java compiler to use a new `-release` compiler argument which is the short form of all three compiler arguments together `-source`, `-target` and `-bootclasspath`.
+
+[{tabs}]
+====
+Gradle::
++
+--
+Often `-source` and `-target` compiler argument configured in this way.
+It does not guarantee cross compilation.
+
+.build.gradle
+[source,groovy]
+----
+include::beginner:example$build-tools/plugins/source-target.gradle[]
+----
+
+To leverage the `-release` compiler argument, we can configure in this way.
+
+.build.gradle
+[source,groovy]
+----
+include::example$build-tools/plugins/release.gradle[]
+----
+<1> Configured by `compileJava` block. `compileJava`  configuration block enabled by `java` or `java-library` plugin.
+
+Alternatively, this can be configured in this way.
+
+.build.gradle
+[source,groovy]
+----
+include::example$build-tools/plugins/alt-release.gradle[]
+----
+<1> Configured by Tasks configuration.
+JavaCompile task enabled by `java` or `java-library` plugin.
+
+--
+
+Maven::
++
+--
+Often `-source` and `-target` compiler argument configured in this way.
+It does not guarantee cross compilation.
+
+.pom.xml
+[source,xml]
+----
+include::beginner:example$build-tools/plugins/source-target.xml[]
+----
+
+Starting from `maven-compiler-plugin` version 3.6, we can configure `-release` compiler argument in this way.
+
+.pom.xml
+[source,xml]
+----
+include::example$build-tools/plugins/release.xml[]
+----
+<1> Configured by `<configuration>` element.
+
+Alternatively, this can be configured in this way.
+
+.pom.xml
+[source,xml]
+----
+include::example$build-tools/plugins/alt-release.xml[]
+----
+<1> Configured by `<properties>` element.
+<2> Configured by `<properties>` element will not work because the `maven-compiler-plugin` default version we use doesn't rely on a recent enough version.
+So we need to explicitly declare a recent version.
+--
+====
+
+

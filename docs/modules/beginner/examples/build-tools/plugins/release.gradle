@@ -1,0 +1,3 @@
+compileJava { // <1>
+    options.compilerArgs.addAll(['--release', '11'])
+}

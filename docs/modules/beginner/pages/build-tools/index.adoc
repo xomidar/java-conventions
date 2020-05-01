@@ -1,0 +1,83 @@
+= Build Tools
+:description: Build Tools for Java. \
+Gradle | Maven
+:keywords: java, oop, programming, build, gradle, maven
+
+[abstract]
+Ant, Maven and Gradle are the most popular build tools in Java platform.
+Almost every java projects now-a-days built on either Maven nor Gradle.
+Although Ant solves different problems, serves different purpose, many projects still leverage the benefits of Ant.
+In this article Maven and Gradle's structure described side by side.
+Developer will find useful code snippets and resources for getting start.
+
+== Brief History
+
+Ant::
+
+First released 19 July 2000 <<bb-ant>>.
+Built on top of `Java` and `XML`.
+Developer needs to explicitly code everything.
+
+Maven::
+
+Maven prefers convention over configuration in their builds.
+It reduces explicit coding for the developers.
+Written in `Java` and working with POM (Project Object Model) based `XML`.
+It also supports `C#`, `Ruby`, `Scala`, and other languages.
+First released 13 July 2004 <<bb-maven>>.
+
+
+Gradle::
+
+Gradle first released 2007. Written in Java, Kotlin, Groovy <<bb-gradle>>.
+Gradle also prefers the concept of convention over configuration.
+
+[CAUTION]
+This article has no intention to compare between Maven and Gradle, neither it has intention to prove one is best over other.
+Both tools have their advantages and special use cases.
+Primary goal of this article is syntax comparison so that developer can start learning side by side or learn one from another.
+
+== Convention
+
+Maven and Gradle both prefers the concept `Convention over Configuration` rather than defining explicit configuration every time like Ant.
+By default, both tools implicitly applies some default configuration in your build script to reduce the repetitive configuration.
+
+include::beginner:partial$common/convention-over-configuration.adoc[]
+
+include::beginner:page$build-tools/structure.adoc[]
+
+include::beginner:page$build-tools/dependencies.adoc[]
+
+include::beginner:page$build-tools/repositories.adoc[]
+
+include::beginner:page$build-tools/plugins.adoc[]
+
+include::beginner:page$build-tools/multi-module.adoc[]
+
+== Additional Resources
+
+=== Watch
+
+* Pluralsight - https://app.pluralsight.com/library/courses/maven-fundamentals/[Maven Fundamentals, window="_blank"] by Bryan Hansen.
+** Duration *2h 24m*.
+** Released *28 Jun 2019*.
+* Pluralsight - https://app.pluralsight.com/library/courses/gradle-build-tool-fundamentals/[Gradle Build Tool Fundamentals, window="_blank"] by Kevin Jones.
+** Duration *2h 30m*.
+** Released *15 Apr 2020*.
+
+=== Read
+
+* https://docs.gradle.org/[Gradle Official User Manual, window="_blank"]
+* http://maven.apache.org/guides/index.html[Maven Official Documentation, window="_blank"]
+* https://www.jetbrains.com/help/idea/maven-support.html[Intellij IDEA - Maven, window="_blank"]
+* https://www.jetbrains.com/help/idea/gradle.html[Intellij IDEA - Gradle, window="_blank"]
+
+[bibliography]
+== References
+
+* [[[bb-ant,1]]] Apache Ant. https://en.wikipedia.org/wiki/Apache_Ant[Wikipedia]
+* [[[bb-maven,2]]] Apache Maven. https://en.wikipedia.org/wiki/Apache_Maven[Wikipedia]
+* [[[bb-gradle,3]]] Gradle. https://en.wikipedia.org/wiki/Gradle[Wikipedia]
+
+//http://openjdk.java.net/jeps/247
+

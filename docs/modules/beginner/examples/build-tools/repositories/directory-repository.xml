@@ -1,0 +1,12 @@
+<project>
+    [...]
+    <repositories>
+        [...]
+        <repository>
+            <id>maven-repository</id>
+            <url>file:///${project.basedir}/maven-repository</url><!--1-->
+        </repository>
+        [...]
+    </repository>
+    [...]
+</project>

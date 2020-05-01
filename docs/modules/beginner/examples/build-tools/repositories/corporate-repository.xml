@@ -1,0 +1,19 @@
+<project>
+    [...]
+    <repositories>
+        [...]
+        <repository><!--1-->
+            <id>spring-snapshot</id>
+            <name>Spring Maven SNAPSHOT Repository</name>
+            <url>http://repo.springsource.org/libs-snapshot</url>
+            <snapshots>
+                <enabled>true</enabled><!--2-->
+            </snapshots>
+            <releases>
+                <enabled>false</enabled><!--3-->
+            </releases>
+        </repository>
+        [...]
+    </repository>
+    [...]
+</project>

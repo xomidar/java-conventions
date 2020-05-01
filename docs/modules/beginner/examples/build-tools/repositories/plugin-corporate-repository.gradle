@@ -1,0 +1,18 @@
+pluginManagement {
+    repositories {// <1>
+        maven {
+
+            url REPOSITORY // <2>
+
+            credentials { // <3>
+                username = REPOSITORY_USERNAME
+                password = REPOSITORY_PASSWORD
+            }
+
+            mavenContent {
+                snapshotsOnly() // <4>
+                releasesOnly() // <5>
+            }
+        }
+    }
+}

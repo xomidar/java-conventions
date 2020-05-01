@@ -1,0 +1,21 @@
+<project>
+    [...]
+    <dependencies>
+        [...]
+        <dependency><!--1-->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>1.0</version>
+            <scope>runtime</scope><!--2-->
+        </dependency>
+        <dependency><!--3-->
+            <groupId>com.sample</groupId>
+            <artifactId>sample</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/Name_Your_JAR.jar</systemPath>
+        </dependency>
+        [...]
+    </dependencies>
+    [...]
+</project>

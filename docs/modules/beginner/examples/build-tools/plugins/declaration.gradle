@@ -1,0 +1,7 @@
+plugins {
+    id 'java' // <1>
+    id 'java-library' apply false // <2>
+    id "org.springframework.boot" version "2.0.4.RELEASE" // <3>
+}
+
+apply plugin: "java-library" // <4>
