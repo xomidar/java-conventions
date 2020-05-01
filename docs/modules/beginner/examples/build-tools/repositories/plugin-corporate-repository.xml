@@ -1,0 +1,19 @@
+<project>
+    [...]
+    <pluginRepositories>
+        [...]
+        <pluginRepository><!--1-->
+            <id>acme corp</id>
+            <name>Acme Internal Corporate Repository</name>
+            <url>http://acmecorp.com/plugins</url>
+            <snapshots>
+                <enabled>true</enabled><!--2-->
+            </snapshots>
+            <releases>
+                <enabled>true</enabled><!--3-->
+            </releases>
+        </pluginRepository>
+        [...]
+    </pluginRepositories>
+    [...]
+</project>

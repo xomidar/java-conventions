@@ -1,0 +1,9 @@
+<project>
+    [...]
+    <modules>
+        <module>module-one</module>
+        <module>module-two</module>
+        <module>module-three</module>
+    </modules><!--1-->
+    [...]
+</project>

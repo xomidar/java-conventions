@@ -1,0 +1,137 @@
+== Dependencies
+
+External dependencies of your project usually declared as build script dependencies.
+Gradle and Maven takes the responsibility to resolved build script dependencies from available repositories and its cache.
+Gradle and Maven applies your dependencies to different scopes of your project such as during compile or runtime.
+This scope defined based on the configuration.
+
+[{tabs}]
+====
+Gradle::
++
+--
+Gradle build script dependencies can be declared in many ways.
+After applying plugins like `java`, `java-library`, `java-platform` or `application` appropriate https://docs.gradle.org/current/userguide/declaring_dependencies.html#sec:what-are-dependency-configurations[dependency configuration, window="_blank"] (e.g. `api`, `implementation`) will be available to declare your dependencies.
+
+.build.gradle
+[source,groovy]
+----
+include::beginner:example$build-tools/dependencies/dependencies-example.gradle[]
+----
+<1> Plugin makes available dependency configuration in your build script, so that you can use 'implementation', 'testImplementation' for dependencies.
+<2> The `group:name:version` style string notation.
+<3> Map-style notation.
+<4> Declaring arbitrary files as dependencies.
+<5> Putting all jars from 'libs' onto compile classpath.
+<6> Internal shared project/module as dependency.
+
+[#gradle-dependencies-configuration]
+*Most used dependency configuration:*
+
+api::
+Declaring API dependencies.
+
+implementation::
+extends compile.
+Implementation only dependencies.
+
+compileOnly::
+Compile time only dependencies, not used at runtime.
+
+runtimeOnly::
+Runtime only dependencies.
+
+testImplementation::
+extends testCompile, implementation.
+Implementation only dependencies for tests.
+
+testCompileOnly::
+Additional dependencies only for compiling tests, not used at runtime.
+
+testRuntimeOnly::
+extends runtimeOnly Runtime only dependencies for running tests.
+
+annotationProcessor::
+Annotation processors used during compilation.
+
+Lear more from the official documentation of https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.dsl.DependencyHandler.html[DependencyHandler, window="_blank"] and https://docs.gradle.org/current/userguide/java_plugin.html#sec:java_plugin_and_dependency_management[Gradle Java Plugin, window="_blank"].
+--
+
+Maven::
++
+--
+Maven dependencies declared inside `<dependencies>` element.
+Default scope of dependencies is compile.
+
+.pom.xml
+[source,xml]
+----
+include::beginner:example$build-tools/dependencies/dependencies-example.xml[]
+----
+<1> Dependency declaration.
+<2> Scope declaration.
+If nothing is specified default is compile.
+<3> Local `jar` as dependency.
+This feature is deprecated.
+It's recommended to used local file repository instead.
+
+*Most used dependency scope:*
+
+compile::
+This is the default scope, used if none is specified.
+
+provided::
+This is much like compile, but indicates you expect the JDK or a container to provide the dependency at runtime.
+
+runtime::
+This scope indicates that the dependency is not required for compilation, but is for execution.
+
+test::
+This scope indicates that the dependency is only available for the test compilation and execution phases.
+
+http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#dependency-scope[To learn more Maven dependency scopes]
+--
+====
+
+=== Transitive Dependencies
+
+Transitive dependencies are the dependencies of your dependency in your build script.
+Gradle and Maven, both tools automatically resolves transitive dependencies.
+You can exclude or manage transitive dependencies by the additional configuration in your dependency.
+
+[{tabs}]
+====
+Gradle::
++
+--
+
+Exclude transitive dependencies.
+
+.build.gradle
+[source,groovy]
+----
+include::beginner:example$build-tools/dependencies/transitive-dependencies-example.gradle[]
+----
+<1> In case of versions conflict '3.1' version of hibernate wins.
+<2> Excluding by module name.
+<3> Excluding by group name.
+<4> Excluding by both module and group.
+<5> Disabling all transitive dependencies of this dependency.
+
+--
+
+Maven::
++
+--
+
+Exclude transitive dependencies.
+
+.pom.xml
+[source,xml]
+----
+include::beginner:example$build-tools/dependencies/transitive-dependencies-example.xml[]
+----
+<1> Exclude all transitive dependencies.
+
+--
+====

@@ -1,0 +1,45 @@
+== Commands
+
+Maven and Gradle plugins include commands for the build process.
+
+[{tabs}]
+====
+Gradle::
++
+--
+
+Tasks added by `java` plugins. https://docs.gradle.org/current/userguide/java_plugin.html#sec:java_tasks[Full list, window="_blank"].
+
+.Gradle Tasks
+[cols="h,d"]
+|===
+^.^|Task ^.^|Purpose
+
+<.^|compileJava
+|Compiles production Java source files using the JDK compiler.
+
+<.^|build
+|Aggregate tasks that performs a full build of the project. This task is added by the Base Plugin.
+
+<.^|clean
+|Deletes the project build directory.
+
+
+|===
+--
+
+Maven::
++
+--
+.Maven Goals
+[cols="h,d"]
+|===
+^.^|Goal ^.^|Purpose
+
+|build
+|Hide All Tool Windows
+
+|===
+--
+====
+

@@ -1,0 +1,36 @@
+== Multi Module Project
+
+Gradle and Maven both tools offer convenient way to configure multiple module project with minimal effort.
+
+[{tabs}]
+====
+Gradle::
++
+--
+Multi module gradle project
+
+.settings.gradle
+[source,groovy]
+----
+include::example$build-tools/multi-module/declaration.gradle[]
+----
+
+<1> Multi module declaration
+
+https://docs.gradle.org/current/userguide/multi_project_builds.html[Learn more from the official documentation, window="_blank"].
+
+--
+
+Maven::
++
+--
+Multi module maven project
+
+.pom.xml
+[source,xml]
+----
+include::example$build-tools/multi-module/declaration.xml[]
+----
+<1> Multi module declaration
+--
+====

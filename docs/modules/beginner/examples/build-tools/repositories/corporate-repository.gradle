@@ -1,0 +1,16 @@
+repositories {
+    maven {
+
+        url REPOSITORY // <1>
+
+        credentials { // <2>
+            username = REPOSITORY_USERNAME
+            password = REPOSITORY_PASSWORD
+        }
+
+        mavenContent {
+            snapshotsOnly() // <3>
+            releasesOnly() // <4>
+        }
+    }
+}

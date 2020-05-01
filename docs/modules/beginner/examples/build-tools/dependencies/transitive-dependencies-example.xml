@@ -1,0 +1,19 @@
+<project>
+    [...]
+    <dependencies>
+        [...]
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>1.0</version>
+            <exclusions>
+                <exclusion><!--1-->
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        [...]
+    </dependencies>
+    [...]
+</project>

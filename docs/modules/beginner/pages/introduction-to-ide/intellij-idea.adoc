@@ -42,7 +42,7 @@ https://resources.jetbrains.com/storage/products/intellij-idea/docs/IntelliJIDEA
 This keymap card is also available inside your IDE under menu:Help[Keymap Reference].
 ====
 
-include::intellij-idea-keymap.adoc[]
+include::beginner:page$introduction-to-ide/intellij-idea-keymap.adoc[]
 
 == Additional Resources
 

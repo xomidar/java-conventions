@@ -1,0 +1,3 @@
+include ':module-one',
+        ':module-two',
+        ':module-three' //<1>

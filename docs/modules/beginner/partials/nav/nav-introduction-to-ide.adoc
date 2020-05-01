@@ -1,0 +1,2 @@
+* Introduction to IDE
+** xref:beginner:introduction-to-ide/intellij-idea.adoc[IntelliJ IDEA]

@@ -19,7 +19,7 @@ No prior knowledge required to start from the beginner level.
 Programming concepts (e.g. data structure, object oriented programming etc) as well as Java core concepts will be covered in this level.
 After completion of this segment trainee can do basic java programming.
 
-* xref:java:beginner:intellij-idea.adoc[Start Learning]
+* xref:java:beginner:introduction-to-ide/intellij-idea.adoc[Start Learning]
 
 [.card]
 === Intermediate
