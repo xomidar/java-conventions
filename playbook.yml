@@ -27,7 +27,7 @@ output:
   dir: ./public
   clean: true
   destinations:
-    - provider: archive
-      path: ./public/master.zip
+#    - provider: archive
+#      path: ./public/master.zip
     - provider: fs
       path: ./

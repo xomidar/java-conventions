@@ -1,0 +1,92 @@
+= Code
+:description: Code
+:keywords: java, oop, programming, ide, intellij
+:experimental:
+
+[abstract]
+Java Code Best Practices
+
+== Case Conventions
+
+|===
+|Package |Class |Method |Variables |Constants
+
+
+|lowercase
+|CamelCase
+|pascalCase
+|pascalCase
+|UPPER_CASE
+|===
+
+
+== Primitive Data Types
+
+[grid="all"]
+|===
+|Category |Types |Default Value |Size (bits) |Minimum Value |Maximum Value
+
+
+.4+^.^|Integer
+m|byte
+m|0
+|8
+|-128
+|127
+
+m|short
+m|0
+|16
+|-2^15^
+|2^15^-1
+
+m|int
+m|0
+|32
+|-2^31^
+|2^31^-1
+
+m|long
+m|0L
+|64
+|-2^63^
+|2^63^-1
+
+.2+^.^|Floating-point
+m|float
+m|0.0f
+|32
+|2^-149^
+|(2-2^-23^)·2^127^
+
+m|double
+m|0.0d
+|64
+|2^-1074^
+|(2-2^-52^)·2^1023^
+
+.2+^.^|Other
+m|char
+m|'\u0000'
+|16
+|0
+|2^16^-1
+
+m|boolean
+m|false
+|--
+|--
+|--
+
+|===
+
+== Additional Resources
+
+=== Watch
+
+* .
+
+=== Read
+
+* .
+

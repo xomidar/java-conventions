@@ -1,0 +1,5 @@
+* xref:beginner:conventions/index.adoc[Best Practices & Conventions]
+** xref:beginner:conventions/code.adoc[Code]
+** xref:beginner:conventions/framework-spring.adoc[Framework: Spring]
+** xref:beginner:conventions/rest-api-design.adoc[Rest API Design]
+** xref:beginner:conventions/rest-api-error-design.adoc[Rest API Error Design]

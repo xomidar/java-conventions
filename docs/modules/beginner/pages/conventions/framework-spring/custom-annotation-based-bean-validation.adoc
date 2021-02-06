@@ -1,0 +1,129 @@
+== Custom Annotation Based Bean Validation
+
+Often our business requires data validation that does not match with built-in java bean validation.
+Below is the example of an account number validation that must be 13 digits long of `String`.
+Even we can imagine further, the value of account number constant can be set from the configuration.
+
+[source,java]
+----
+public class AccountService {
+
+  public static final int ACCOUNT_NUMBER_LENGTH = 13;
+
+  public void addAccount(Account account) {
+
+    boolean accountNumberHasInvalidLength =
+        Optional.ofNullable(account)
+            .map(Account::getNumber)
+            .map(number -> number.length() == ACCOUNT_NUMBER_LENGTH)
+            .orElse(true);
+
+    if (accountNumberHasInvalidLength) {
+      // throw some exception
+    }
+
+    accountReposiotry.save(account);
+  }
+
+  //...
+}
+----
+
+Problem of this code is we have to use this validation block everytime we want to validate the account number length.
+Spring offers us cleaner way to implement this type of data validation to reduce the boilerplate code as well as increases the code re-usability.
+Three steps needs to follow to use custom annotation validation:
+
+. Create custom annotation.
+. Create `ConstraintValidator` for that custom annotation to validate data.
+. Use that custom annotation.
+
+Creating Custom Annotation `AccountNumber`
+
+[source,java]
+----
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Constraint(validatedBy = { AccountNumberValidator.class })
+public @interface AccountNumber {
+
+    String message() default "Account number length does not match expected";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+
+    int value();
+
+}
+----
+
+Creating `ConstraintValidator` for `AccountNumber` annotation to validate the length.
+
+.v1
+[source,java]
+----
+@Component
+public class AccountNumberValidator implements ConstraintValidator<AccountNumber, String> {
+
+    private int expectedLength;
+
+    @Override
+    public void initialize(AccountNumber accountNumber) {
+        this.expectedLength = accountNumber.value();
+    }
+
+    @Override
+    public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
+        return s == null || s.length() == this.expectedLength;
+    }
+}
+----
+
+`ConstraintValidator` can be implement many ways, here is another example:
+
+.v2
+[source,java]
+----
+@Component
+public class AccountNumberValidator implements ConstraintValidator<AccountNumber, String> {
+
+    @Value("${account.number.length}") //<.>
+    private int expectedLength;
+
+    @Override
+    public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
+        return s == null || s.length() == this.expectedLength;
+    }
+}
+----
+<.> Account number validation length will be retrieved from the spring configuration.
+
+Using that `AccountNumber` annotation.
+
+[source,java]
+----
+
+public class Account {
+    @AccountNumber(value = 13) // v1 // <.>
+//  @AccountNumber // v2
+    @NotNull
+    private String number;
+}
+----
+<.> Custom annotation for field validation and reuse.
+
+After Implementing Custom Annotation Validation, `AccountService` will look like:
+
+[source,java]
+----
+public class AccountService {
+
+  public void addAccount(Account account) {
+
+    accountReposiotry.save(account);
+  }
+
+  //...
+}
+----

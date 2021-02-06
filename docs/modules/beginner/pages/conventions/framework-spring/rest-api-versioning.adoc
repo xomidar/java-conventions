@@ -1,0 +1,52 @@
+== Rest API Versioning
+
+Rest API versioning can be implemented in four ways.
+
+. URI Path.
+. Query Parameters.
+. Custom Headers.
+. Content Negotiation.
+
+=== Content Negotiation for API Versioning
+
+[TIP]
+====
+Spring handles content negotiation before invoking the rest controller's method.
+Based on the request `Accept` header spring automatically invoke appropriate method.
+No additional logic required for method switching based on the version.
+It keeps code clean and maintainable.
+OpenAPI specification also have good support for content negotiation versioning.
+====
+
+Declaring custom content type
+
+[source,java]
+----
+
+public class CustomMediaType implements Serializable {
+
+    public static final String APPLICATION_JSON_VALUE_V1 = "application/vnd.brain-station-23.app-v1.0+json";
+    public static final String APPLICATION_JSON_VALUE_V2 = "application/vnd.brain-station-23.app-v2.0+json";
+
+}
+----
+
+Rest API versioning through content negotiation
+
+[source,java]
+----
+@GetMapping(produces = CustomMediaType.APPLICATION_JSON_VALUE_V1)// <.>
+ResponseEntity<List<String>> getAllAccounts(){
+
+    //...
+}
+
+@GetMapping(produces = CustomMediaType.APPLICATION_JSON_VALUE_V2)// <.>
+ResponseEntity<List<Account>> getAllAccountsV2(){
+
+    //...
+}
+
+----
+<.> Get all account API Version 1
+<.> Get all account API Version 2

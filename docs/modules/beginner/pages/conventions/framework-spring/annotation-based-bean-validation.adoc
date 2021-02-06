@@ -1,0 +1,69 @@
+== Annotation Based Bean Validation
+
+=== Enable Java Bean Validation
+
+To enable java annotation bean validation add below dependencies:
+
+[{tabs}]
+====
+Gradle::
++
+--
+
+.build.gradle
+[source,groovy]
+----
+include::beginner:example$conventions/framework-spring/annotation-based-bean-validation.gradle[]
+----
+<.> Spring Boot Validation Starter Dependency. It includes all necessary dependencies.
+<.> Validation API based on JSR 380 specification.
+<.> Hibernate Validator is the reference implementation of the Validation API.
+<.> Expression Language Dependency.
+--
+
+Maven::
++
+--
+.pom.xml
+[source,xml]
+----
+include::beginner:example$conventions/framework-spring/annotation-based-bean-validation.xml[]
+----
+<.> Spring Boot Validation Starter Dependency. It includes all necessary dependencies.
+<.> Validation API based on JSR 380 specification.
+<.> Hibernate Validator is the reference implementation of the Validation API.
+<.> Expression Language Dependency.
+--
+====
+
+=== Java Bean Validation Annotation to Validate Data
+
+Standard JSR380 annotations can be used to validate the data.
+
+[source,java]
+----
+include::example$conventions/framework-spring/annotation-based-bean-validation.java[]
+----
+<.> `@NotNull` validates that the annotated property value is not null.
+<.> `@AssertTrue` validates that the annotated property value is true.
+<.> `@Size` validates that the annotated property value has a size between the attributes min and max; can be applied to String, Collection, Map, and array properties.
+<.> `@Min` validates that the annotated property has a value no smaller than the value attribute.
+<.> `@Max` validates that the annotated property has a value no larger than the value attribute.
+<.> `@Email` validates that the annotated property is a valid email address.
+
+[TIP]
+====
+Full list of standard JSR380 annotations are available https://javaee.github.io/javaee-spec/javadocs/javax/validation/constraints/package-summary.html[here, window="_blank"].
+====
+
+
+=== Java Bean Validation Annotation to Validate Data at RestController
+
+For rest service endpoint data validation, include `@Valid` annotation.
+
+[source,java]
+----
+include::example$conventions/framework-spring/annotation-based-bean-validation-rest.java[]
+----
+<.> `@Valid` intercept the request and validate it before the method is invoked.
+

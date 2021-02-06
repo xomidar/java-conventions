@@ -1,0 +1,18 @@
+== Specialized Version of @Component Annotation
+
+Spring provides some specialized version of @Component annotation along with the generic @Component annotation itself.
+
+. @Component is a generic stereotype for any Spring-managed component or bean.
+. @Repository is a stereotype for the persistence layer.
+. @Service is a stereotype for the service layer.
+. @Controller is a stereotype for the presentation layer.
+. @RestController is a stereotype for the rest service layer.
+
+[TIP]
+====
+Consider using specialized annotation instead of generic @Component annotation in appropriate scenario.
+@Repository, @Service, @Controller annotations are acts almost same as @Component annotation during bean scanning and bean registration, but they have other specialization.
+
+If @Repository annotation used in database layer then it will help to catch platform-specific exceptions and re-throw them as one of Spring’s unified unchecked exception.
+Whereas @Component annotation doesn't have this specialization.
+====

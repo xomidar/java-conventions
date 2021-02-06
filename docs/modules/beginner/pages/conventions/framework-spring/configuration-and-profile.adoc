@@ -1,0 +1,24 @@
+== Configuration and Profile
+
+=== Use `.yaml` Configurations instead of `.properties`
+
+Spring supports both yaml and properties file for its configurations.
+As `kubernetes` and `docker-compose` both uses yaml file for its configuration, knowledge of yaml file will help to work with `kubernetes` and `docker-compose`.
+It's also comparatively easy to design complex configuration profiles in yaml file.
+
+=== Spring Configuration Profiles
+
+Spring provides built in support to manage project environment related configurations by https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles[Spring Profiles].
+For example `dev` profile can be activated through command line flag.
+
+[source, bash]
+----
+java -jar admin-0.0.1.jar --spring.profiles.active=dev
+----
+
+
+[WARNING]
+====
+Spring changes its https://spring.io/blog/2020/08/14/config-file-processing-in-spring-boot-2-4[Config File Processing, window="_blank"] in version 2.4.
+Older configurations (before Spring version 2.4) may require https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-Config-Data-Migration-Guide[migration, window="_blank"] to support new spring versions capabilities.
+====

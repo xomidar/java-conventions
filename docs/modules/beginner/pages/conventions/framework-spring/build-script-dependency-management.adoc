@@ -1,0 +1,49 @@
+== Managing Build Script Dependencies with Bills of Materials (BOM)
+
+****
+[quote,'https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-dependency-management[Spring Dependency Management, window="_blank"]']
+____
+Each release of Spring Boot provides a curated list of dependencies that it supports.
+In practice, you do not need to provide a version for any of these dependencies in your build configuration, as Spring Boot manages that for you.
+When you upgrade Spring Boot itself, these dependencies are upgraded as well in a consistent way.
+____
+****
+
+=== Use Dependency Management in Build Script
+
+Spring encourages to use dependency management instead of providing hard-code version number for all the dependencies.
+As spring documentation states if dependency management used in the project build script, appropriate dependency version number will automatically resolve for us.
+Spring provides multiple ways to manage dependencies in the Gradle and Maven build scripts.
+One of the easiest ways is using spring provided Bills of Materials.
+
+
+[{tabs}]
+====
+Gradle::
++
+--
+
+.build.gradle
+[source,groovy]
+----
+include::beginner:example$conventions/framework-spring/dependency-management.gradle[]
+----
+<.> Spring boot dependencies BOM
+<.> Spring cloud dependencies BOM
+<.> Dependency version is not require as appropriate version number will be automatically resolved by https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#managing-dependencies[gradle dependency management, window="_blank"].
+
+--
+
+Maven::
++
+--
+.pom.xml
+[source,xml]
+----
+include::beginner:example$conventions/framework-spring/dependency-management.xml[]
+----
+<.> Spring boot dependencies BOM
+<.> Spring cloud dependencies BOM
+<.> Dependency version is not require as appropriate version number will be automatically resolved by https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/htmlsingle/#using-import[maven dependency management, window="_blank"].
+--
+====
