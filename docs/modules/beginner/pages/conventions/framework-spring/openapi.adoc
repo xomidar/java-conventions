@@ -1,0 +1,29 @@
+== OpenAPI
+
+=== Enable OpenAPI at Spring Project
+
+
+[{tabs}]
+====
+Gradle::
++
+--
+
+.build.gradle
+[source,groovy]
+----
+include::beginner:example$conventions/framework-spring/openapi.gradle[]
+----
+--
+
+Maven::
++
+--
+.pom.xml
+[source,xml]
+----
+include::beginner:example$conventions/framework-spring/openapi.xml[]
+----
+--
+====
+

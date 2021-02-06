@@ -1,0 +1,94 @@
+== Lombok
+
+=== Use Lombok Annotations
+
+Use lombok instead of generating boilerplate codes.
+A POJO with generated getter and setter will look like:
+
+[source,java]
+----
+public class User {
+
+    private long id;
+
+    private String name;
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+----
+
+After using lombok https://projectlombok.org/features/GetterSetter[@Getter and @Setter, window="_blank"] annotation, POJO looks more clean and maintainable.
+Under the hood lombok generates required getter and setter method based on the lombok annotations during compile time.
+
+[source,java]
+----
+@Getter//<.>
+@Setter//<.>
+public class User {
+
+    private long id;
+
+    private String name;
+}
+----
+<.> Lombok's annotation `@Getter` to generate getter for the all class fields.
+<.> Lombok's annotation `@Setter` to generate setter for the all class fields.
+
+Some useful lombok annotations:
+
+. https://projectlombok.org/features/Data[@Data, window="_blank"]
+. https://projectlombok.org/features/constructor[@RequiredArgsConstructor, window="_blank"]
+. https://projectlombok.org/features/Builder[@Builder, window="_blank"]
+. https://projectlombok.org/features/experimental/Jacksonized[@Jacksonized, window="_blank"]
+. https://projectlombok.org/features/log[@Slf4j, window="_blank"]
+
+=== Enable Lombok
+
+To enable lombok use bellow dependencies for your build script. To enable lombok at Intellij IDEA use this https://plugins.jetbrains.com/plugin/6317-lombok/[Intellij IDEA plugin, window="_blank"]
+
+[TIP]
+====
+Build script dependencies and IDE plugin (e.g. Intellij IDEA) both required side by side for the development.
+====
+
+
+
+[{tabs}]
+====
+Gradle::
++
+--
+
+.build.gradle
+[source,groovy]
+----
+include::beginner:example$conventions/framework-spring/lombok.gradle[]
+----
+
+--
+
+Maven::
++
+--
+.pom.xml
+[source,xml]
+----
+include::beginner:example$conventions/framework-spring/lombok.xml[]
+----
+--
+====

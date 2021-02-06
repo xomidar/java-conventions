@@ -1,0 +1,67 @@
+== Spring Security
+
+=== Use _Spring Security_ Over _Spring Security OAuth_
+
+As https://github.com/spring-projects/spring-security-oauth/[Spring Security OAuth, window="_blank"] project is deprecated and in maintenance mode https://spring.io/blog/2018/01/30/next-generation-oauth-2-0-support-with-spring-security[since January 2018, window="_blank"], use spring recommended spring security dependencies for new projects to implement OAuth2 and OIDC.
+For migrations use https://github.com/spring-projects/spring-security/wiki/OAuth-2.0-Migration-Guide[recommended approaches, window="_blank"].
+
+[WARNING]
+====
+* Do not use deprecated security dependencies for new projects
+** `"org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure"`
+** `"org.springframework.security.oauth:spring-security-oauth2"`
+* Do not use deprecated security annotations for new projects
+** `@EnableOAuth2Sso`
+** `@EnableOAuth2Client`
+** `@EnableResourceServer`
+====
+
+[TIP]
+====
+https://www.keycloak.org/[Keycloak by RedHat, window="_blank"] is a solid candidate for Identity Provider/ Authorization server over https://spring.io/blog/2020/04/15/announcing-the-spring-authorization-server[newly, window="_blank"] announced https://github.com/spring-projects-experimental/spring-authorization-server[Spring Authorization Server, window="_blank"]
+====
+
+To use spring recommended approaches use bellow dependencies in new projects as appropriate.
+
+[{tabs}]
+====
+Gradle::
++
+--
+
+.build.gradle
+[source,groovy]
+----
+include::beginner:example$conventions/framework-spring/security.gradle[]
+----
+<.> Spring cloud projects (e.g. Spring Cloud Gateway) security dependency.
+<.> Spring boot projects security dependency.
+<.> Spring Security's https://docs.spring.io/spring-security/site/docs/current/reference/html5/#spring-security-oauth2-client[OAuth 2.0 client, window="_blank"] support.
+<.> Spring Security's support for the https://docs.spring.io/spring-security/site/docs/current/reference/html5/#spring-security-oauth2-resource-server[OAuth 2.0 resource servers, window="_blank"].
+<.> Spring Security's support for the https://docs.spring.io/spring-security/site/docs/current/reference/html5/#spring-security-oauth2-jose[JOSE, window="_blank"] framework.
+--
+
+Maven::
++
+--
+.pom.xml
+[source,xml]
+----
+include::beginner:example$conventions/framework-spring/security.xml[]
+----
+<.> Spring cloud projects (e.g. Spring Cloud Gateway) security dependency.
+<.> Spring boot projects security dependency.
+<.> Spring Security's https://docs.spring.io/spring-security/site/docs/current/reference/html5/#spring-security-oauth2-client[OAuth 2.0 client, window="_blank"] support.
+<.> Spring Security's support for the https://docs.spring.io/spring-security/site/docs/current/reference/html5/#spring-security-oauth2-resource-server[OAuth 2.0 resource servers, window="_blank"].
+<.> Spring Security's support for the https://docs.spring.io/spring-security/site/docs/current/reference/html5/#spring-security-oauth2-jose[JOSE, window="_blank"] framework.
+--
+====
+
+=== Use WebClient for Performing Web Requests
+
+[WARNING]
+====
+Spring security encourages using `WebClient` instead of `RestTemplate` and `FeignClient`.
+Therefore, spring security dose not provide native token relay support for `RestTemplate` and `FeignClient`.
+Additional effort required to work with `RestTemplate` and `FeignClient` using Spring Security.
+====

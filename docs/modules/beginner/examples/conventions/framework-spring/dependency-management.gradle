@@ -1,0 +1,12 @@
+ext {
+    springBootDependencies = '2.4.2'
+    springCloudDependencies = '2020.0.1'
+}
+
+dependencies {
+
+    implementation enforcedPlatform("org.springframework.boot:spring-boot-dependencies:${springBootDependencies}") // <.>
+    implementation enforcedPlatform("org.springframework.cloud:spring-cloud-dependencies:${springCloudDependencies}") // <.>
+
+    implementation("org.springframework.boot:spring-boot-starter-web") // <.>
+}

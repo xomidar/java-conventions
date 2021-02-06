@@ -1,0 +1,38 @@
+= Framework: Spring
+:description: Framework Spring
+:keywords: java, oop, programming, ide, intellij
+:experimental:
+
+[abstract]
+Best pattern and practices for spring boot and spring cloud framework.
+
+include::beginner:page$conventions/framework-spring/annotation-driven-dependency-injection.adoc[]
+
+include::beginner:page$conventions/framework-spring/annotation-based-bean-validation.adoc[]
+
+include::beginner:page$conventions/framework-spring/custom-annotation-based-bean-validation.adoc[]
+
+include::beginner:page$conventions/framework-spring/lombok.adoc[]
+
+include::beginner:page$conventions/framework-spring/security.adoc[]
+
+include::beginner:page$conventions/framework-spring/build-script-dependency-management.adoc[]
+
+include::beginner:page$conventions/framework-spring/configuration-and-profile.adoc[]
+
+include::beginner:page$conventions/framework-spring/openapi.adoc[]
+
+include::beginner:page$conventions/framework-spring/rest-api-versioning.adoc[]
+
+include::beginner:page$conventions/framework-spring/specialization-of-component-annotation.adoc[]
+
+== Additional Resources
+
+=== Watch
+
+* .
+
+=== Read
+
+* .
+

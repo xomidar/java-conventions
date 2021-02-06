@@ -1,0 +1,84 @@
+== Annotation Driven Dependency Injection
+
+In Spring ecosystem developers can implement dependency injection in three ways by the https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-autowired-annotation[@Autowired, window="_blank"] annotation.
+Annotation can be placed on:
+
+. *Constructor*
++
+[source,java]
+----
+public class MovieRecommender {
+
+    private final CustomerPreferenceDao customerPreferenceDao;
+
+    @Autowired
+    public MovieRecommender(CustomerPreferenceDao customerPreferenceDao) {
+        this.customerPreferenceDao = customerPreferenceDao;
+    }
+
+    // ...
+}
+----
+
+. *Setter*
++
+[source,java]
+----
+public class SimpleMovieLister {
+
+    private MovieFinder movieFinder;
+
+    @Autowired
+    public void setMovieFinder(MovieFinder movieFinder) {
+        this.movieFinder = movieFinder;
+    }
+
+    // ...
+}
+----
+
+. *Field*
++
+[source,java]
+----
+public class MovieRecommender {
+
+    @Autowired
+    private MovieCatalog movieCatalog;
+
+    // ...
+}
+----
+
+=== Use Constructor Based Dependency Injection
+
+[TIP]
+====
+It is recommended to use constructor based dependency injection.
+Constructor based dependency injection have some benefits over other:
+
+. All Dependencies Initialization.
+. Immutability.
+. Identifying Code Smells by Large Class Constructor Parameters.
+. Preventing Errors in Tests.
+====
+
+Constructor based dependency injection: Spring version lower than 4.3
+
+[source,java]
+----
+include::example$conventions/framework-spring/di.java[]
+----
+<.> @Autowired annotation for the constructor based dependency injection.
+@Autowired annotation is mandatory for spring version lower than 4.3.
+
+Constructor based dependency injection: Spring version 4.3 and above
+
+[source,java]
+----
+include::example$conventions/framework-spring/di-new.java[]
+----
+<.> From spring version 4.3 @Autowired annotation is not mandatory for single constructor class.
+For the multiple constructors class, one constructor with @Autowired annotation is mandatory.
+
+
