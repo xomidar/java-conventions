@@ -1,0 +1,78 @@
+= Build Profile
+:description: Gradle Build Profile
+:keywords: java, oop, programming, spring, java, ide, intellij
+:experimental:
+
+:url-code: https://github.com/xomidar/java-bank-demo/commits/master
+:url-gradle-profile: https://docs.gradle.org/current/userguide/migrating_from_maven.html#migmvn:profiles_and_properties
+
+[abstract]
+Often our project needs to build for a particular environment like public cloud, docker, kubernetes or developer's local machine.
+Each environment may require special treatment like specific dependencies, environment variables etc.
+Even our project CI/CD may require additional configurations than our developers local machine.
+Gradle build profile is here to rescue.
+We can declare Maven like profile using gradle and design environment specific configuration for our project build.
+
+include::beginner:page$learn-by-example/version.adoc[]
+
+== Action: Define environment specific build profile
+
+=== Create Profile
+
+Here we initially create `dev` build profile.
+Initially we will include gradle dependencies caching configuration at our dev profile.
+
+. Create a `profile-dev.gradle` file at `gradle` directory.
+. Add bellow snippet at the dev profile.
++
+[source,groovy]
+.profile-dev.gradle
+----
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds' //<.>
+}
+----
+<.> This configuration will always reload dependencies during gradle refresh.
+It is very helpful for referencing internal library snapshots and library development.
+
+. Add profile switching logic to root `build.gradle` file.
++
+[source,groovy]
+.build.gradle
+----
+if (!hasProperty('buildProfile')) ext.buildProfile = 'dev' //<.>
+
+if (file("gradle/profile-${buildProfile}.gradle").exists()) { //<.>
+    apply from: "gradle/profile-${buildProfile}.gradle" //<.>
+}
+----
+<.> If `buildProfile` property absent from build command we explicitly set `dev` profile.
+<.> Validating if mentioned build profile is available.
+<.> Applying build profile if it exists.
+
+. To activate profile during project build.
++
+[source,bash]
+----
+gradlew clean build -PbuildProfile=prod //<.>
+
+gradlew clean build //<.>
+----
+<.> To activate explicitly build profile
+<.> Build with the defaults.
+
+[TIP]
+You may want to learn to link your gradle build profile with your spring boot profile.
+To learn the process xref:beginner:learn-by-example/rest/spring-profiles.adoc#_link_spring_profiles_with_gradle_build_profile[see].
+
+== Learn More
+
+* Official Doc - {url-gradle-profile}[Maven Like Gradle Profiles, window="_blank"]
+
+== Project Code
+
+* Github - {url-code}[Build Profile, window="_blank"]
+
+== Next Step
+
+xref:beginner:learn-by-example/rest/spring-maven-bom.adoc[Spring Maven BOM]

@@ -1,0 +1,23 @@
+= TLS
+:description: TLS
+:keywords: java, oop, programming, spring, java, ide, intellij
+:experimental:
+
+:url-code: https://github.com/xomidar/java-bank-demo/commits/master
+
+[abstract]
+Best pattern and practices for spring boot and spring cloud framework.
+
+include::beginner:page$learn-by-example/version.adoc[]
+
+== Section
+
+Start
+
+== Project Code
+
+* Github - {url-code}[TLS, window="_blank"]
+
+== Next Step
+
+xref:beginner:learn-by-example/rest/logging.adoc[Logging]

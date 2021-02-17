@@ -1,0 +1,98 @@
+= Initial Gradle Config
+:description: Initial Gradle Configuration
+:keywords: java, oop, programming, spring, java, ide, intellij
+:experimental:
+
+:url-code: https://github.com/xomidar/java-bank-demo/commits/master
+:url-gradle-properties: https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties
+
+[abstract]
+To leverage the capabilities of gradle, we will customise gradle build script throughout our development.
+Initially we will do following customisation in our gradle script.
+
+include::beginner:page$learn-by-example/version.adoc[]
+
+== Action: Explicitly define gradle version
+
+[TIP]
+By default, gradle update its version automatically to the latest stable version.
+To keep our build consistent across all our environment we will explicitly define gradle version at our `build.gradle`.
+
+Add below code snippet to your gradle build script.
+
+[source,groovy]
+.build.gradle
+----
+wrapper.gradleVersion = '6.7.1'
+----
+
+== Action: Keep build script configurations in one place
+
+[TIP]
+Spring initializr generates build dependencies version and configurations (e.g. dependencies version, gradle version, project group) at build script.
+Gradle also provides alternative way to manage all version number and configuration data in one place through `gradle.properties`.
+
+=== Gradle Properties
+
+We will use following steps to keep all build script configurations in one place.
+
+. Create `gradle.properties` file at root project directory.
+. Move necessary configurations to `gradle.properties` and reference it at your `build.gradle`.
+
+After configuring `gradle.properties`, our property file will look like:
+
+[source,properties]
+.gradle.properties
+----
+group=com.brainstation23
+version=0.0.1-SNAPSHOT
+sourceCompatibility=11
+#
+springBootVersion=2.4.2
+gradleVersion=6.7.1
+----
+
+our `build.gradle` file will look like:
+
+[source,groovy]
+.build.gradle
+----
+plugins {
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+assert System.properties["java.specification.version"] == JavaVersion.VERSION_11 || JavaVersion.VERSION_12 || JavaVersion.VERSION_13 || JavaVersion.VERSION_14
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+wrapper.gradleVersion = gradleVersion
+----
+
+== Learn More
+
+* Gradle provides many capabilities through gradle properties.
+To learn more check official doc - {url-gradle-properties}[Gradle Properties, window="_blank"].
+
+== Project Code
+
+* Github - {url-code}[Project Initiation, window="_blank"]
+
+== Next Step
+
+xref:beginner:learn-by-example/rest/build-profile.adoc[Gradle Profile]

@@ -1,0 +1,89 @@
+= Spring Rest Services
+:description: Learn By Example - Spring Rest Services
+:keywords: java, oop, programming, spring, java, rest, intellij
+:experimental:
+:url-code: https://github.com/xomidar/java-bank-demo/commits/master
+
+[abstract]
+We strongly believe, *if you want to master something, teach it.* This document will lead us to establish a democratic culture across our developers to share their knowledge among each other.
+The Goal of the series is to consolidate the best java pattern, practices and principles in one place, which was acquired throughout many years of our professional experiences.
+This is an open document, anyone can submit pull request for improvement.
+
+include::beginner:page$learn-by-example/version.adoc[]
+
+== Brain Station 23 Bank
+
+Step by step we will build simple `Brain Station 23 Bank` rest service using common best practices.
+We will continue discussing the _**benefits**_ as well as _**trade off**_ of each design decision.
+
+Follow the steps sequentially to build the complete project.
+
+[TIP]
+This project is available at {url-code}[Github, window="_blank"].
+#Code committed step wise to help developer understand the development progress.# Usually step name and commit message is identical.
+Checkout the appropriate commit to follow the step progress.
+
+== Document Format and Structures
+
+Each step explained in a common format.
+We segregated each step in 5 major sections.
+The purpose of each section explained bellow.
+
+. *Summary:*
++
+====
+Every step, at the beginning has a summary section.
+Here developer have the opportunity to learn the reason why this action has been taken, it's benefits, consideration, alternative so on.
+
+====
+
+. *Action:*
++
+====
+In action section, we will explain how to activate, enable, implement our selected topic.
+This section will answer only one question - #"how to achieve the benefits from our selected topic?"#.
+This is the soul purpose of action section.
+It may have sub-sections.
+====
+
+. *Learn More:*
++
+====
+Learn more section dedicated to our desperate developer to quenching their thirst.
+Here they will get resources to deep dive on selected topics.
+
+Developers may check the hyperlinks as well, which is available across in every topic.
+====
+
+. *Project Code:*
++
+====
+Project github repository.
+#Always open for improvement#.
+Before approaching for improvement developer should consider the project scope, boundary and goal.
+====
+
+. *Next Step:*
++
+====
+Next step in this series to complete the project.
+====
+
+. *Other:*
++
+====
+This sub sections will be available across the steps and may contain important information for developers.
+
+[TIP]
+Developers will get additional tips across the step from *Tip* sections like this.
+
+[WARNING]
+We will warn developers about some consideration from *Warning* section.
+
+[NOTE]
+Developer may find useful information in *Note* section.
+====
+
+== Let's Start
+
+xref:beginner:learn-by-example/rest/project-initiation.adoc[Project Initiation]

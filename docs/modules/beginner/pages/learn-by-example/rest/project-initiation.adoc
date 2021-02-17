@@ -1,0 +1,82 @@
+= Project Initiation
+:description: Spring Rest Service Project Initiation
+:keywords: java, oop, programming, spring, java, ide, intellij
+:experimental:
+
+:url-spring-initializr: https://start.spring.io/
+:url-code: https://github.com/xomidar/java-bank-demo/commits/master
+
+[abstract]
+Spring provides out of the box project generator to get start spring boot project without any additional effort.
+We will start generating our project skeleton from {url-spring-initializr}[Spring Initializr, window="_blank"].
+It will help us to quick start our project.
+Later gradually we customise project's as projects requirement.
+
+include::beginner:page$learn-by-example/version.adoc[]
+
+== Action: Generate Project by Spring Initializr
+
+=== Configure Project Stack
+
+Generate initial project skeleton from {url-spring-initializr}[Spring Initializr, window="_blank"].
+Select bellow configuration to generate the project.
+
+[cols=",m"]
+|===
+|Configuration Name m|Selected Value
+
+|Project
+|Gradle Project
+
+|Language
+|Java
+
+|Spring Boot
+|Default selection
+
+|Dependencies
+|Spring Web
+
+2.+^|*Project Metadata*
+
+|Group
+m|com.brainstation23
+
+|Artifact
+m|bank
+
+|Name
+|Brain Station 23 Bank
+
+|Description
+|Brain Station 23 Bank Rest Service
+
+|Package Name
+m|com.brainstation23.bank
+
+|Packaging
+m|jar
+
+|Java
+m|11
+|===
+
+This configuration will look like the bellow image.
+
+image::learn-by-example/rest/spring-initializr.png[Spring Initializr]
+
+=== Download
+
+Download the generated folder, open the project in your IDE.
+
+== Learn More
+
+* {url-spring-initializr}[Spring Initializr, window="_blank"].
+
+== Project Code
+
+* Github - {url-code}[Project Initiation, window="_blank"]
+
+== Next Step
+
+xref:beginner:learn-by-example/rest/initial-gradle-config.adoc[Initial Gradle Config]

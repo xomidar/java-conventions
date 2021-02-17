@@ -1,0 +1,114 @@
+= OpenAPI Specification
+:description: OpenAPI Specification
+:keywords: java, oop, programming, spring, java, ide, intellij
+:experimental:
+
+:url-code: https://github.com/xomidar/java-bank-demo/commits/master
+:url-sprinfox-doc: https://springfox.github.io/springfox/docs/current/
+:url-wikipedia-open-api: https://en.wikipedia.org/wiki/OpenAPI_Specification
+
+[abstract]
+"The OpenAPI Specification, originally known as the Swagger Specification, is a specification for machine-readable interface files for describing, producing, consuming, and visualizing RESTful web services." - {url-wikipedia-open-api}[Wikipedia, window="_blank"].
+Often OpenAPI specification acts as documentation for developers.
+It helps UI and Backend developers to work side by side.
+
+include::beginner:page$learn-by-example/version.adoc[]
+
+== Action: OpenAPI
+
+=== Enable OpenAPI
+
+Springfox provide good support to auto generate OpenAPI specification.
+They have spring boot starter `io.springfox:springfox-boot-starter` library for spring boot project.
+To enable OpenAPI do the following.
+
+. Include version information at `gradle.properties`.
++
+.gradle.properties
+[source,properties]
+----
+projectName=Brain Station 23 Bank
+#
+openApiVersion=3.0.0
+----
+
+. Include springfox starter at `build.gradle`.
++
+.build.gradle
+[source,groovy]
+----
+dependencies {
+    compileOnly "io.springfox:springfox-boot-starter:${openApiVersion}"
+}
+----
+
+. Enable spring boot build properties through gradle build configuration to `build.gradle`.
+After enabling spring boot build properties, spring boot will generate `build-info.properties` inside the `.jar` which is accessible during runtime.
+We will use build properties to dynamically generates OpenAPI information (e.g. project name, version or any custom information).
++
+.build.gradle
+[source,groovy]
+----
+springBoot {
+    buildInfo {
+        properties {
+            name = projectName
+        }
+    }
+}
+----
+
+. Add java configuration to override default configurations.
++
+.OpenApiConfiguration.java
+[source,java]
+----
+@Configuration
+@ConditionalOnClass(OpenApiAutoConfiguration.class)
+public class OpenApiConfiguration {
+
+  private final BuildProperties buildProperties;
+
+  public OpenApiConfiguration(BuildProperties buildProperties) {
+    this.buildProperties = buildProperties;
+  }
+
+  @Bean
+  public Docket api() {
+    return new Docket(DocumentationType.OAS_30)
+        .groupName(buildProperties.getName() + " " + buildProperties.getVersion())
+        .select()
+        .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
+        .paths(PathSelectors.any())
+        .build()
+        .apiInfo(
+            new ApiInfoBuilder()
+                .title(buildProperties.getName() + " API")
+                .description(buildProperties.getName() + " REST API")
+                .version(buildProperties.getVersion())
+                .license("© Brain Station 23 Ltd.")
+                .licenseUrl("https://brainstation-23.com")
+                .contact(
+                    new Contact(
+                        "Md. Rezaul Hasan", "https://brainstation-23.com/", "reza@bs-23.net"))
+                .build());
+  }
+}
+----
+
+. Now OpenAPI specification will be accessible at http://localhost:8081/swagger-ui/index.html[http://localhost:8081/swagger-ui/index.html, window="_blank"]
+It will look like the bellow.
++
+image::learn-by-example/rest/open-api.png[Open API]
+
+== Learn More
+
+* Official {url-sprinfox-doc}[Springfox Documentation]
+
+== Project Code
+
+* Github - {url-code}[OpenAPI Specification, window="_blank"]
+
+== Next Step
+
+xref:beginner:learn-by-example/rest/design-rest-api.adoc[Design Rest API]

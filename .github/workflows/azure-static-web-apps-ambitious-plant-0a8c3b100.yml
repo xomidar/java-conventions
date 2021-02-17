@@ -13,6 +13,9 @@ jobs:
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 15.x ]
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v2
@@ -22,6 +25,12 @@ jobs:
         uses: kameshsampath/antora-site-action@master
         with:
           antora_playbook: playbook.yml
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: sudo npm --no-package-lock i
+      - run: sudo node scripts/populate-icon-defs.js ./public
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@master

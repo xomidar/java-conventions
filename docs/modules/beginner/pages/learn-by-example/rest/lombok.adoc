@@ -1,0 +1,114 @@
+= Lombok
+:description: Lombok
+:keywords: java, oop, programming, spring, java, ide, intellij
+:experimental:
+
+:url-code: https://github.com/xomidar/java-bank-demo/commits/master
+:url-lombok-plugin: https://plugins.jetbrains.com/plugin/6317-lombok/
+:url-lombok: https://projectlombok.org
+
+[abstract]
+Lombok reduces java boilerplate code by its annotation.
+Based on the annotation Lombok generates boiler plate codes for us during compile time.
+It increases developer productivity, helps developer to invest more time on their business logic.
+
+include::beginner:page$learn-by-example/version.adoc[]
+
+
+== Action: Enable Lombok
+
+[NOTE]
+Lombok build script dependencies and IDE (e.g. Intellij IDEA) lombok plugin both required side by side to use lombok efficiently at development.
+
+=== Enable Lombok at IntelliJ IDEA
+
+. Install {url-lombok-plugin}[Intellij IDEA lombok plugin, window="_blank"]
+. Enable annotation processor from menu:File[Settings > Build,Execution,Deployment > Compiler > Annotation Processor > Enable Annotation Processing].
+
+=== Enable Lombok at Build Script
+
+To enable lombok use bellow dependencies at root build script `build.gradle`.
+
+.build.gradle
+[source,groovy]
+----
+dependencies {
+    implementation("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+    testAnnotationProcessor("org.projectlombok:lombok")
+}
+----
+
+== Example: Use Lombok Annotations
+
+Use lombok instead of generating boilerplate codes.
+A simple POJO with generated getter and setter will look like:
+
+[source,java]
+----
+public class User {
+
+    private long id;
+
+    private String name;
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+----
+
+After using lombok https://projectlombok.org/features/GetterSetter[@Getter and @Setter, window="_blank"] annotation, POJO looks more clean and maintainable.
+Under the hood lombok generates required getter and setter method based on the lombok annotations during compile time.
+
+[source,java]
+----
+@Getter//<.>
+@Setter//<.>
+public class User {
+
+    private long id;
+
+    private String name;
+}
+----
+<.> Lombok's annotation `@Getter` to generate getter for the all class fields.
+<.> Lombok's annotation `@Setter` to generate setter for the all class fields.
+
+[TIP]
+Use `Delombok` to see what code lombok generates for us.
+In IntelliJ IDEA right click on the java file which contains lombok annotation, then click menu:Refactor[Delombok].
+Lombok will replace those annotations and generate the all boiler plate codes for you.
+
+Some useful lombok annotations:
+
+. https://projectlombok.org/features/Data[@Data, window="_blank"]
+. https://projectlombok.org/features/constructor[@RequiredArgsConstructor, window="_blank"]
+. https://projectlombok.org/features/Builder[@Builder, window="_blank"]
+. https://projectlombok.org/features/experimental/Jacksonized[@Jacksonized, window="_blank"]
+. https://projectlombok.org/features/log[@Slf4j, window="_blank"]
+
+== Learn More
+
+* {url-lombok}[Lombok, window="_blank"]
+
+== Project Code
+
+* Github - {url-code}[Lombok, window="_blank"]
+
+== Next Step
+
+xref:beginner:learn-by-example/rest/map-struct.adoc[MapStruct]

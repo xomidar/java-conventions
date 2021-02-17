@@ -1,0 +1,89 @@
+= Google Java Code Formatter
+:description: Google Java Code Formatter
+:keywords: java, oop, programming, spring, java, ide, intellij
+:experimental:
+
+:url-code: https://github.com/xomidar/java-bank-demo/commits/master
+:url-google-java-formatter: https://github.com/google/google-java-format
+:url-google-java-style: https://google.github.io/styleguide/javaguide.html
+:url-google-java-formatter-plugin: https://plugins.jetbrains.com/plugin/8527-google-java-format
+:url-spotless: https://github.com/diffplug/spotless
+
+[abstract]
+{url-google-java-style}[Google Java Style, window="_blank"] is the most respected coding standard in Java platform.
+To keep our java code format consistent among developers, auto code formatter is the best options.
+Google also provides {url-google-java-formatter}[java code formatter, window="_blank"] to reformat the code.
+
+include::beginner:page$learn-by-example/version.adoc[]
+
+== Action: Google Java Code Formatter
+
+To comply {url-google-java-style}[Google Java Style, window="_blank"], google provides {url-google-java-formatter}[google java code formatter, window="_blank"] to reformat code.
+We will use google java code formatter to keep our java code format consistent.
+
+=== Enable Google Code Java Formatter at IntelliJ IDEA
+
+To enable google java code formatter at Intellij IDEA do the following:
+
+. Install {url-google-java-formatter-plugin}[Google Java Formatter, window="_blank"] IntelliJ IDEA plugin.
+. Enable this plugin from menu:File[Settings > Other Settings > google-java-format Settings > Enable goolge java formate].
+. Now kbd:[Ctrl+Alt+L] (windows) will format code by using google java style guide.
+
+=== Enable Google Code Java Formatter at Build Script
+
+We will use {url-spotless}[Spotless, window="_blank"] gradle plugin to forcefully reformat java code during each code compile.
+Spotless will first check the code, if code is available for reformat then it will execute reformat.
+If spotless find nothing to reformat, it will skip the reformat step.
+
+To configure spotless gradle plugin do the following:
+
+. Add spotless gradle plugin version `gradle.properties`.
++
+[source,properties]
+.gradle.properties
+----
+spotlessVersion=5.10.1
+googleJavaFormatVersion=1.9
+----
+
+. Add spotless gradle plugin at root `build.gradle`.
++
+[source,groovy]
+.build.gradle
+----
+plugins {
+    id "com.diffplug.spotless" version "${spotlessVersion}" apply false
+}
+----
+
+. Apply spotless gradle plugin and configure during compile time run at dev profile `profile-dev.gradle`.
++
+[source,groovy]
+.build.gradle
+----
+apply plugin: 'com.diffplug.spotless'
+
+spotless.java {
+    googleJavaFormat(googleJavaFormatVersion)
+}
+
+tasks.withType(JavaCompile).configureEach { javaCompile ->
+    dependsOn 'spotlessApply'
+}
+----
+
+. Now during code compile time spotless plugin will attempt to reformat our code.
+
+== Learn More
+
+* {url-google-java-style}[Google Java Style Guide, window="_blank"]
+* {url-google-java-formatter}[Google Java Code Formatter, window="_blank"]
+* {url-spotless}[Spotless, window="_blank"]
+
+== Project Code
+
+* Github - {url-code}[Google Java Code Formatter, window="_blank"]
+
+== Next Step
+
+xref:beginner:learn-by-example/rest/lombok.adoc[Lombok]

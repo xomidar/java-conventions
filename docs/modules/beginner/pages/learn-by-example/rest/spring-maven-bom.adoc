@@ -1,0 +1,65 @@
+= Spring Maven BOM
+:description: Spring Maven BOM
+:keywords: java, oop, programming, spring, java, ide, intellij
+:experimental:
+
+:url-code: https://github.com/xomidar/java-bank-demo/commits/master
+:url-gradle-bom: https://docs.gradle.org/current/userguide/platforms.html
+
+[abstract]
+Spring provides Maven Bill of Materials (BOM) to automatically resolve appropriate versions for your dependencies.
+If you use spring maven BOM in your gradle build script, gradle will resolve the best version for your dependencies through spring maven bom.
+
+include::beginner:page$learn-by-example/version.adoc[]
+
+== Action: Spring Maven BOM
+
+[NOTE]
+By default, spring applies maven spring boot BOM to your gradle build by applying `io.spring.dependency-management` plugin.
+This plugin includes additional configurations and does not include spring cloud BOM.
+Even you will need to explicitly define spring maven BOM, if you are building non bootable jar.
+
+=== Add Spring Maven BOM
+
+To add explicitly spring maven BOM add the following snippet:
+
+[source,groovy]
+.build.gradle
+----
+dependencies {
+    implementation enforcedPlatform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") //<.>
+    implementation enforcedPlatform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}") //<.>
+}
+----
+<.> Spring Boot Maven BOM.
+<.> Spring Cloud Maven BOM.
+
+[source,groovy]
+.build.gradle
+----
+dependencies {
+    // Without Applying BOM
+    implementation "org.projectlombok:lombok:1.18.18" //<.>
+
+    // By Applying BOM
+    implementation "org.projectlombok:lombok" //<.>
+}
+----
+<.> Explicit dependency version required without Spring Boot Maven BOM.
+<.> Gradle will resolve appropriate version through Spring Boot Maven BOM.
+
+[WARNING]
+By applying spring maven BOM does not guarantee gradle will resolve all dependencies versions.
+Apart from spring internal dependencies spring helps to resolve few most common dependencies through their maven BOM.
+
+== Learn More
+
+* Official Doc - {url-gradle-bom}[Sharing dependency versions between projects, window="_blank"]
+
+== Project Code
+
+* Github - {url-code}[Spring Maven BOM, window="_blank"]
+
+== Next Step
+
+xref:beginner:learn-by-example/rest/google-java-code-formatter.adoc[Google Java Code Formatter]
