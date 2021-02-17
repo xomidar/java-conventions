@@ -1,4 +1,5 @@
 .Beginner
 include::beginner:partial$nav/nav-introduction-to-ide.adoc[]
 include::beginner:partial$nav/nav-build-tools.adoc[]
+include::beginner:partial$nav/nav-learn-by-example.adoc[]
 include::beginner:partial$nav/nav-conventions.adoc[]

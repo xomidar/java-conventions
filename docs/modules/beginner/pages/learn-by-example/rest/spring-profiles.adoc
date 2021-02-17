@@ -1,0 +1,120 @@
+= Spring Profiles
+:description: Spring Profiles
+:keywords: java, oop, programming, spring, java, ide, intellij
+:experimental:
+
+:url-code: https://github.com/xomidar/java-bank-demo/commits/master
+:url-spring-profiles: https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles
+:url-config-file-processing: https://spring.io/blog/2020/08/14/config-file-processing-in-spring-boot-2-4
+:url-older-config-migration: https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-Config-Data-Migration-Guide
+
+[abstract]
+Spring boot provides out of the box {url-spring-profiles}[Spring Profiles] capabilities to maintain your environment specific(e.g. `dev`, `prod`) application configuration.
+For example, its common practice to use the different database for development and test.
+It can achieve very easily though spring profiles.
+
+include::beginner:page$learn-by-example/version.adoc[]
+
+== Action: Spring Profiles
+
+[TIP]
+====
+#Use `.yaml` Configurations instead of `.properties`.# Spring supports both yaml and properties file format for its configurations.
+As `kubernetes` and `docker-compose` both uses yaml file for its configuration, knowledge of yaml file will help to work with `kubernetes` and `docker-compose`.
+It's also comparatively easy to design complex configuration profiles in yaml file.
+====
+
+=== Create Spring Profiles
+
+Spring initializr generates `application.properties` for spring configuration.
+We will move into YAML (`.yml`) based configuration by renaming it to `application.yml`.
+Initially we will only configure `dev` profile.
+Do the following to create spring profiles.
+
+. Create `application-dev.yml` file.
+Add port configuration to the file.
++
+.application-dev.yml
+[source,yml]
+----
+server:
+  port: 8081
+----
+
+. Rename `application.properties` to `application.yml`.
+. Add spring profiles active configuration to `application.yml`.
++
+.application.yml
+[source,yml]
+----
+spring:
+  profiles:
+    active: dev
+----
+
+[WARNING]
+====
+Spring changes its {url-config-file-processing}[Config File Processing, window="_blank"] in version 2.4.
+Older configurations (before Spring version 2.4) may require {url-older-config-migration}[migration, window="_blank"] to support new spring versions capabilities.
+====
+
+=== Link Spring Profiles with Gradle Build Profile
+
+During build, we can activate spring profiles based on build profile.
+In real development scenario, during `dev` build developer may want to activate the `dev` spring profile as well.
+It's possible through gradle build script configuration.
+We will update further our profiles.
+
+. Update spring profiles active configuration to `application.yml`.
++
+.application.yml
+[source,yml]
+----
+spring:
+  application:
+    name: bank
+  profiles:
+    # The commented value for `active` can be replaced with valid Spring profiles to load.
+    # Otherwise, it will be filled in by gradle when building the JAR file
+    # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
+    active: #spring.profiles.active#
+----
+
+. Add spring profile switching logic to root `build.gradle` file.
+This code snippet will change the active profile value based on `buildProfile` value.
++
+.build.gradle
+[source,groovy]
+----
+processResources {
+    filesMatching("application.yml") {
+        filter {
+            it.replace("#spring.profiles.active#", buildProfile)
+        }
+    }
+}
+----
+
+[TIP]
+====
+It is still possible to override `spring.profiles.active` at commandline.
+
+[source,bash]
+----
+java -jar bank-0.0.1.jar --spring.profiles.active=prod
+----
+====
+
+== Learn More
+
+* Official Spring Doc - {url-spring-profiles}[Spring Profiles]
+* Changes at {url-config-file-processing}[Config File Processing, window="_blank"]
+* Older config {url-older-config-migration}[migration, window="_blank"]
+
+== Project Code
+
+* Github - {url-code}[Spring Profiles, window="_blank"]
+
+== Next Step
+
+xref:beginner:learn-by-example/rest/openapi-specification.adoc[OpenAPI Specification]

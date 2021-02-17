@@ -1,0 +1,46 @@
+= Git Properties
+:description: Git Properties
+:keywords: java, oop, programming, spring, java, ide, intellij
+:experimental:
+
+:url-code: https://github.com/xomidar/java-bank-demo/commits/master
+:url-git-properties: https://github.com/n0mer/gradle-git-properties
+
+[abstract]
+Best pattern and practices for spring boot and spring cloud framework.
+
+include::beginner:page$learn-by-example/version.adoc[]
+
+== Git Properties
+
+=== Enable Git Properties at Build Script
+
+Add {url-git-properties}[gradle git properties, window="_blank"] plugin version to `gradle.properties`.
+
+.gradle.properties
+[source,properties]
+----
+gitPropertiesPluginVersion=2.2.4
+----
+
+Use bellow dependencies at root build script `build.gradle`.
+
+.build.gradle
+[source,groovy]
+----
+plugins {
+    id "com.gorylenko.gradle-git-properties" version "${gitPropertiesPluginVersion}"
+}
+
+gitProperties {
+    failOnNoGitDirectory = false
+}
+----
+
+== Project Code
+
+* Github - {url-code}[Git Properties, window="_blank"]
+
+== Next Step
+
+xref:beginner:learn-by-example/rest/spring-profiles.adoc[Spring Profiles]

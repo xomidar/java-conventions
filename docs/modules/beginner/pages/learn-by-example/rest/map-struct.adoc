@@ -1,0 +1,42 @@
+= MapStruct
+:description: MapStruct
+:keywords: java, oop, programming, spring, java, ide, intellij
+:experimental:
+
+:url-code: https://github.com/xomidar/java-bank-demo/commits/master
+
+[abstract]
+Best pattern and practices for spring boot and spring cloud framework.
+
+include::beginner:page$learn-by-example/version.adoc[]
+
+== MapStruct
+
+=== Enable MapStruct at Build Script
+
+Add MapStruct version to `gradle.properties`.
+
+.gradle.properties
+[source,properties]
+----
+mapstructVersion=1.4.2.Final
+----
+
+Use bellow dependencies at root build script `build.gradle`.
+
+.build.gradle
+[source,groovy]
+----
+dependencies {
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+}
+----
+
+== Project Code
+
+* Github - {url-code}[MapStruct, window="_blank"]
+
+== Next Step
+
+xref:beginner:learn-by-example/rest/git-properties.adoc[Git Properties]

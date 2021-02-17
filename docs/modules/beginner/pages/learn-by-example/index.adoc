@@ -1,0 +1,83 @@
+= Learn By Example
+:description: Learn By Example
+:keywords: java, oop, programming, spring, java, rest, intellij
+:experimental:
+
+[abstract]
+This is a curated resource of java pattern, principals, best practices & conventions.
+There are no hard and fast rules a developer always implement best pattern and practices.
+Every pattern and practices has cost as well as value, don't use blindly.
+To keep our code maintainable developers should implement the bare minimum best practices and conventions.
+These are the catalogue of best practices, developer should adapt appropriate pattern and practices based on the project scope and requirements.
+
+== Jargon
+
+. *Premature Optimization*
++
+--
+
+--
+
+. *Cargo Cult Programming*
++
+--
+
+--
+
+. *Garbage In, Garbage Out*
++
+--
+
+--
+
+. *Not Invented Here (NIH)*
++
+--
+
+--
+
+. *Cowboy*
++
+--
+
+--
+
+. *Ripple Effects*
++
+--
+
+--
+
+== Reference Resources
+
+=== Conventions
+
+* https://www.oracle.com/java/technologies/javase/codeconventions-contents.html[Oracle | Code Conventions for the Java(TM) Programming Language `1999 - Officially Not Used By Oracle`, window="_blank"]
+
+=== Style Guide
+
+* https://google.github.io/styleguide/javaguide.html[Google | Java Style Guide, window="_blank"]
+* https://google.github.io/styleguide/jsoncstyleguide.xml[Google | JSON Style Guide, window="_blank"]
+* https://github.com/twitter-archive/commons/blob/master/src/java/com/twitter/common/styleguide.md[Twitter | Java Style Guide `archived`, window="_blank"]
+* https://github.com/spring-projects/spring-framework/wiki/Code-Style[Spring Framework | Code Style, window="_blank"]
+
+=== Code Formatter
+
+* https://github.com/google/google-java-format[Google | Java Format, window="_blank"]
+* https://github.com/diffplug/spotless[Diffplug | Spotless: Keep your code spotless, window="_blank"]
+
+=== Blogs
+
+* http://www.javapractices.com[Java Practices]
+* https://spring.io/blog[Spring | Blog, window="_blank"]
+* https://mitcommlab.mit.edu/broad/commkit/coding-and-comment-style/[MIT Comm Lab | Coding and Comment Style, window="_blank"]
+
+=== Research Papers & Books
+
+* https://pages.apigee.com/rs/apigee/images/api-design-ebook-2012-03.pdf[Software Engineering at Google by Fergus Henderson, window="_blank" ]
+
+* https://pages.apigee.com/rs/apigee/images/api-design-ebook-2012-03.pdf[Google Cloud | Apigee | Web API Design - API Management, window="_blank" ]
+
+* https://www.oreilly.com/library/view/effective-java/9780134686097/[Effective Java by Joshua Bloch, window="_blank" ]
+
+* https://www.oreilly.com/library/view/head-first-java/0596009208/[Head First Java: A Brain-Friendly Guide by Kathy Sierra & Bert Bates, window="_blank" ]
