@@ -1,37 +1,46 @@
-<header class="header">
-    <nav class="navbar" id="topbar">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-link" href="{{or siteRootUrl siteRootPath}}">TRAINING //</a>
-                <button class="navbar-burger" data-target="topbar-menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-            <div id="topbar-menu" class="navbar-menu">
-                <div class="navbar-start">
-                    <div class="navbar-item has-dropdown">
-                        <a class="navbar-link" href="{{or siteRootUrl siteRootPath}}">Docs</a>
-                        <div class="navbar-dropdown explore">
-                            <div class="cols">
-                                <ul>
-                                    <li><a href="{{relativize site.components.java.url}}">Java Training</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="navbar-item component" href="{{relativize page.componentVersion.url}}">{{#unless
-                            (eq page.componentVersion.displayVersion 'master')}}
-                        <span class="version">{{page.componentVersion.displayVersion}}</span>{{/unless}}</a>
-                    {{#if env.ALGOLIA_API_KEY}}
-                        <form class="navbar-item search">
-                            <input type="text" placeholder="Search Couchbase Docs" class="query" id="search-query">
-                            <button type="button" class="search"><span>Search</span></button>
-                        </form>
-                    {{/if}}
-                </div>
-            </div>
-        </div>
-    </nav>
+<header class="header fixed-top">
+  <div class="header-top-row">
+      <div class="container">
+          <nav class="navbar navbar-expand-md flex-nowrap justify-content-between navbar-new-top">
+              <ul class="navbar-brand-list">
+                <li>
+                  <a class="navbar-brand cb-documentation" href="{{or siteRootUrl siteRootPath}}">
+                    <img src="{{{uiRootPath}}}/img/cb-documentation.svg" alt="Documentation" class="cb-docs" />
+                    <img src="{{{uiRootPath}}}/img/cb-docs-hover.svg" alt="Documentation" class="hide cb-hover-docs" />
+                  </a>
+                </li>
+              </ul>
+              {{! <ul class="nav navbar-nav mr-auto"></ul> }}
+              <button class="navbar-burger" data-target="topbar-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+
+          </nav>
+      </div>
+  </div>
+  {{! End primary header }}
+  {{! Start secondary header }}
+  <div class="header-bottom-row" id="topbar-menu">
+    <div class="container">
+        <nav  class="navbar navbar-new-bottom">
+
+              <div class="navbar-collapse collapse" id="navbar2">
+                <ul class="navbar-nav w-100 justify-content-start">
+                  <li class="nav-item">
+                    <a href="{{#with (and site.url site.homeUrl)}}{{@root.site.url}}{{this}}{{else}}{{siteRootPath}}{{/with}}" class="nav-link">
+                      <i class="fas fa-home"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{relativize (resolvePageURL 'ROOT::index.adoc')}}">
+                      Server
+                    </a>
+                  </li>
+                </ul>
+              </div>
+        </nav>
+    </div>
+   </div>
 </header>
