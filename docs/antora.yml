@@ -2,5 +2,5 @@ name: java
 title: Java Training
 version: master
 nav:
-  - modules/ROOT/nav.adoc
+  #- modules/ROOT/nav.adoc
   - modules/beginner/nav.adoc
