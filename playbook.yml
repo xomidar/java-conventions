@@ -5,6 +5,7 @@ site:
   keys:
     google_analytics: 'UA-164685388-1'
 content:
+  branches: master
   sources:
     - url: .
       branches: HEAD
