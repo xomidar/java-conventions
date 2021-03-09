@@ -35,7 +35,7 @@ Do the following to create spring profiles.
 Add port configuration to the file.
 +
 .application-dev.yml
-[source,yml]
+[source,yaml]
 ----
 server:
   port: 8081
