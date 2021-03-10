@@ -6,7 +6,7 @@ site:
     google_analytics: 'UA-164685388-1'
 content:
   sources:
-    - url: ZZhttps://github.com/xomidar/java-conventions.git
+    - url: https://github.com/xomidar/java-conventions.git
       branches: HEAD
       start_path: docs
 asciidoc:
